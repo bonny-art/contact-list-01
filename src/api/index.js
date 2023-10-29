@@ -33,4 +33,16 @@ async function serviceWriteData(data) {
   return resp.json();
 }
 
-export { serviceWriteData };
+function getData() {
+  return fetch(BASE_URL).then((resp) => {
+    console.log(resp);
+    if (!resp.ok) {
+      throw new Error(
+        resp.statusText || `Unknown Error. Response status ${resp.status}`
+      );
+    }
+    return resp.json();
+  });
+}
+
+export { serviceWriteData, getData };
