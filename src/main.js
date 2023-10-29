@@ -1,4 +1,5 @@
 import { formEl } from "./refs";
+import { serviceWriteData } from "./api";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/style.css";
@@ -7,11 +8,9 @@ formEl.addEventListener("submit", onFormInput);
 
 function onFormInput(e) {
   e.preventDefault();
-  //   const { name, number, email } = e.curentTarget.elements;
-  //   console.log(name);
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData);
-  console.log(data);
-
   e.target.reset();
+  data.createdAt = Date.now();
+  serviceWriteData(data).then(console.log).catch(console.log);
 }
