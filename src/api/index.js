@@ -36,7 +36,6 @@ async function serviceWriteData(data) {
 
 function getData() {
   return fetch(BASE_URL).then((resp) => {
-    console.log(resp);
     if (!resp.ok) {
       throw new Error(
         resp.statusText || `Unknown Error. Response status ${resp.status}`
