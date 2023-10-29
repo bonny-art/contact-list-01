@@ -1,5 +1,5 @@
 import { formEl, cardListEl } from "./refs";
-import { serviceWriteData, getData, deleteData } from "./api";
+import { serviceWriteData, getData, deleteData, changeName } from "./api";
 import { createCard } from "./markup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -42,7 +42,7 @@ function onClickDeleteButton(e) {
 
   const card = e.target.closest(".js-wrap-card");
   const id = card.dataset.cardid;
-  console.log(id);
+
   deleteData(id)
     .then(() => {
       card.remove();
@@ -55,5 +55,4 @@ function onEditing(e) {
   const cardId = parentEl.dataset.cardid;
   const text = e.target.textContent;
   changeName(cardId, text);
-  console.log(text);
 }
