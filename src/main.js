@@ -1,5 +1,5 @@
 import { formEl, cardListEl } from "./refs";
-import { serviceWriteData, getData } from "./api";
+import { serviceWriteData, getData, deleteData } from "./api";
 import { createCard } from "./markup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,6 +7,7 @@ import "./css/style.css";
 
 formEl.addEventListener("submit", onFormInput);
 window.addEventListener("load", onLoad);
+cardListEl.addEventListener("click", onClickDeleteButton);
 
 function onFormInput(e) {
   e.preventDefault();
@@ -33,4 +34,17 @@ function onLoad() {
 
 function addMarkup(markup) {
   cardListEl.insertAdjacentHTML("beforeend", markup);
+}
+
+function onClickDeleteButton(e) {
+  if (!e.target.classList.contains("btn-close")) return;
+  // todo запитати, наскільки потрібно плодити змінних
+  const card = e.target.closest(".js-wrap-card");
+  const id = card.dataset.cardid;
+  console.log(id);
+  deleteData(id)
+    .then(() => {
+      card.remove();
+    })
+    .catch(console.log);
 }

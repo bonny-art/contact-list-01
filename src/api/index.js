@@ -7,7 +7,6 @@ const BASE_URL = "http://localhost:3000/contacts/";
 //     body: JSON.stringify(data),
 //   };
 //   return fetch(BASE_URL, options).then((resp) => {
-//     console.log(resp);
 //     if (!resp.ok) {
 //       throw new Error(
 //         resp.statusText || `Unknown Error. Response status ${resp.status}`
@@ -33,6 +32,8 @@ async function serviceWriteData(data) {
   return resp.json();
 }
 
+// todo rewrite with async...await
+
 function getData() {
   return fetch(BASE_URL).then((resp) => {
     console.log(resp);
@@ -45,4 +46,18 @@ function getData() {
   });
 }
 
-export { serviceWriteData, getData };
+function deleteData(id) {
+  const options = {
+    method: "DELETE",
+  };
+  return fetch(`${BASE_URL}/${id}`, options).then((resp) => {
+    if (!resp.ok) {
+      throw new Error(
+        resp.statusText || `Unknown Error. Response status ${resp.status}`
+      );
+    }
+    return resp.json();
+  });
+}
+
+export { serviceWriteData, getData, deleteData };
