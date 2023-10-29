@@ -8,6 +8,7 @@ import "./css/style.css";
 formEl.addEventListener("submit", onFormInput);
 window.addEventListener("load", onLoad);
 cardListEl.addEventListener("click", onClickDeleteButton);
+cardListEl.addEventListener("input", onEditing);
 
 function onFormInput(e) {
   e.preventDefault();
@@ -38,7 +39,7 @@ function addMarkup(markup) {
 
 function onClickDeleteButton(e) {
   if (!e.target.classList.contains("btn-close")) return;
-  // todo запитати, наскільки потрібно плодити змінних
+
   const card = e.target.closest(".js-wrap-card");
   const id = card.dataset.cardid;
   console.log(id);
@@ -47,4 +48,12 @@ function onClickDeleteButton(e) {
       card.remove();
     })
     .catch(console.log);
+}
+
+function onEditing(e) {
+  const parentEl = e.target.closest(".js-wrap-card");
+  const cardId = parentEl.dataset.cardid;
+  const text = e.target.textContent;
+  changeName(cardId, text);
+  console.log(text);
 }
